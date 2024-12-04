@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class EntryPoint : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private IBetPanel _betPanel;
+
+    private void Start()
     {
-        
+        _betPanel.Initialize();
     }
 
-    // Update is called once per frame
-    void Update()
+    [Inject]
+    public void Construct(IBetPanel betPanel)
     {
-        
+        _betPanel = betPanel;
     }
 }

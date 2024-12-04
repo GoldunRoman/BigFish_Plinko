@@ -303,6 +303,7 @@ Transform:
   m_Children:
   - {fileID: 1787489560}
   - {fileID: 922098476}
+  - {fileID: 267944059}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &200185505
@@ -380,6 +381,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200185505}
   m_CullTransparentMesh: 1
+--- !u!1 &267944058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 267944059}
+  - component: {fileID: 267944060}
+  m_Layer: 0
+  m_Name: BetPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &267944059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267944058}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 178026146}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &267944060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267944058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230c5efca00ee694db4cf02ab367c1bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _raiseBetButton: {fileID: 976771606}
+  _reduceBetButton: {fileID: 1646672329}
+  _currentBetTMP: {fileID: 562162220}
 --- !u!1 &294758230
 GameObject:
   m_ObjectHideFlags: 0
@@ -2340,6 +2388,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ballPrefabAtlas: {fileID: 11400000, guid: 82021f8f54d88954fa5e03f463917128, type: 2}
+  _betConfig: {fileID: 11400000, guid: 9e004709641525646b40a85791227bec, type: 2}
+  _betPanel: {fileID: 267944060}
   _ballsPoolContainer: {fileID: 312077074}
 --- !u!1 &814225737
 GameObject:
@@ -5677,6 +5727,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 294758232}
-  - {fileID: 178026146}
   - {fileID: 1097548708}
+  - {fileID: 178026146}
   - {fileID: 354752935}
