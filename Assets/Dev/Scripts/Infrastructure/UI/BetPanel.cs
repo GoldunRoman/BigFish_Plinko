@@ -6,7 +6,7 @@ using Zenject;
 
 public class BetPanel : MonoBehaviour, IBetPanel
 {
-    public Action<int> BetChanged {  get; private set; }
+    public Action<int> BetChanged {  get; set; }
 
     [SerializeField] private Button _raiseBetButton;
     [SerializeField] private Button _reduceBetButton;
