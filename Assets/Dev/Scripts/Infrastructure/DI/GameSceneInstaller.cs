@@ -4,14 +4,21 @@ using Zenject;
 
 public class GameSceneInstaller : MonoInstaller
 {
+    [Header("Instances")]
     [SerializeField] private BallPrefabAtlas _ballPrefabAtlas;
+    [SerializeField] private BetConfig _betConfig;
+    [SerializeField] private BetPanel _betPanel;
 
+    [Space(20)]
+    [Header("References")]
     [SerializeField] private Transform _ballsPoolContainer;
 
     public override void InstallBindings()
     {
         #region General Bindings
         Container.Bind<BallPrefabAtlas>().FromInstance(_ballPrefabAtlas).AsSingle();
+        Container.Bind<BetConfig>().FromInstance(_betConfig).AsSingle();
+        Container.Bind<IBetPanel>().To<BetPanel>().FromInstance(_betPanel).AsSingle();
         #endregion
 
         #region Ball Pool Bindings
