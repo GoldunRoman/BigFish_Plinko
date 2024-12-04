@@ -41,14 +41,6 @@ public class BallSpawner : MonoBehaviour
         }
 
         Ball ball = _poolHub.Spawn(ballType);
-        if (ball != null)
-        {
-            ball.transform.position = _spawnTransform.position;
-            Debug.Log($"<color=magenta>[BallSpawner]</color> Spawned ball of type <b>{ballType}</b> at {_spawnTransform.position}.");
-        }
-        else
-        {
-            Debug.LogError($"<color=magenta>[BallSpawner]</color> Failed to spawn ball of type <b>{ballType}</b>.");
-        }
+        ball.transform.position = _spawnTransform.position;
     }
 }

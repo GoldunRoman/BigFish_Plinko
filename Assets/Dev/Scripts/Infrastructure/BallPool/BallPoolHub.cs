@@ -19,17 +19,13 @@ public class BallPoolHub
             { BallType.Yellow, () => yellowPool.Spawn() },
             { BallType.Red, () => redPool.Spawn() }
         };
-
-        Debug.Log("<color=magenta>[BallPoolHub]</color> Pools successfully injected.");
     }
 
     public Ball Spawn(BallType type)
     {
         if (_spawnFunctions.TryGetValue(type, out var spawnFunction))
         {
-            Ball ball = spawnFunction.Invoke();
-            Debug.Log($"<color=magenta>[BallPoolHub]</color> Spawned {type} ball.");
-            return ball;
+            return spawnFunction.Invoke();
         }
 
         Debug.LogError($"<color=magenta>[BallPoolHub]</color> Pool for ball type {type} not found!");

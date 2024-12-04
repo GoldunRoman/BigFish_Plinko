@@ -30,6 +30,7 @@ public class BallPrefabAtlas : ScriptableObject
             Debug.LogError($"No prefab found for ball type: {ballType}");
             return null;
         }
+
         return ballData.Prefab;
     }
 
