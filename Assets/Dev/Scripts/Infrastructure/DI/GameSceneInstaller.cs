@@ -8,10 +8,7 @@ public class GameSceneInstaller : MonoInstaller
     [SerializeField] private BallPrefabAtlas _ballPrefabAtlas;
     [SerializeField] private BetConfig _betConfig;
     [SerializeField] private BetPanel _betPanel;
-    [SerializeField] private ScoreView _scoreView;
-
-    [Space(20)]
-    [Header("References")]
+    [SerializeField] private UIController _uiController;
     [SerializeField] private Transform _ballsPoolContainer;
 
     public override void InstallBindings()
@@ -20,7 +17,10 @@ public class GameSceneInstaller : MonoInstaller
         Container.Bind<BallPrefabAtlas>().FromInstance(_ballPrefabAtlas).AsSingle();
         Container.Bind<BetConfig>().FromInstance(_betConfig).AsSingle();
         Container.Bind<IBetPanel>().To<BetPanel>().FromInstance(_betPanel).AsSingle();
-        Container.Bind<IScoreView>().To<ScoreView>().FromInstance(_scoreView).AsSingle();
+        Container.Bind<IUIController>().To<UIController>().FromInstance(_uiController).AsSingle();
+        Container.Bind<Transform>().FromInstance(_ballsPoolContainer).AsSingle();
+        Container.Bind<GameStateMachine>().AsSingle().WithArguments(Container);
+        Container.Bind<Wallet>().AsSingle();
         #endregion
 
         #region Ball Pool Bindings
@@ -45,11 +45,6 @@ public class GameSceneInstaller : MonoInstaller
             .AsSingle();
 
         Container.Bind<BallPoolHub>().AsSingle();
-        #endregion
-
-        #region Signal Bus
-        SignalBusInstaller.Install(Container);
-        Container.DeclareSignal<AddPointsSignal>();
         #endregion
     }
 
