@@ -4,18 +4,18 @@ using Zenject;
 public class EntryPoint : MonoBehaviour
 {
     private IBetPanel _betPanel;
-    private IScoreView _scoreView;
+    private Wallet _wallet;
 
     [Inject]
-    public void Construct(IBetPanel betPanel, IScoreView scoreView)
+    public void Construct(IBetPanel betPanel, Wallet wallet)
     {
         _betPanel = betPanel;
-        _scoreView = scoreView;
+        _wallet = wallet;
     }
 
     private void Start()
     {
         _betPanel.Initialize();
-        _scoreView.Initialize();
+        _wallet.Initialize();
     }
 }

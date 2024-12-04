@@ -5,19 +5,20 @@ using Zenject;
 [RequireComponent(typeof(BoxCollider2D))]
 public class KoefSector : MonoBehaviour
 {
+    [SerializeField] private BallType _targetBall;
     [SerializeField][Range(0, 10)] private float _koeficient;
     [SerializeField] private TMP_Text _text;
 
-    private SignalBus _signalBus;
     private IBetPanel _betPanel;
+    private Wallet _wallet;
 
     private int _currentBet;
 
     [Inject]
-    public void Construct(SignalBus signalBus, IBetPanel betPanel)
+    public void Construct(IBetPanel betPanel, Wallet wallet)
     {
-        _signalBus = signalBus;
         _betPanel = betPanel;
+        _wallet = wallet;
     }
 
     private void OnValidate()
@@ -39,7 +40,11 @@ public class KoefSector : MonoBehaviour
     {
         if (collision.transform.TryGetComponent<Ball>(out var ball))
         {
-            _signalBus.Fire(new AddPointsSignal { Points = _currentBet * _koeficient });
+            if (_targetBall != ball.BallType)
+                return;
+
+            _wallet.AddFunds(_currentBet * _koeficient);
+
             ball.Despawn();
         }
     }
