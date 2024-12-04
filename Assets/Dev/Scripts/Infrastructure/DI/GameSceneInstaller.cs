@@ -16,17 +16,17 @@ public class GameSceneInstaller : MonoInstaller
 
         #region Ball Pool Bindings
         Container.BindMemoryPool<GreenBall, BallPool<GreenBall>>()
-            .WithInitialSize(50)
+            .WithInitialSize(20)
             .FromComponentInNewPrefab(_ballPrefabAtlas.GetBallPrefab(BallType.Green))
             .UnderTransform(_ballsPoolContainer);
 
         Container.BindMemoryPool<YellowBall, BallPool<YellowBall>>()
-            .WithInitialSize(50)
+            .WithInitialSize(20)
             .FromComponentInNewPrefab(_ballPrefabAtlas.GetBallPrefab(BallType.Yellow))
             .UnderTransform(_ballsPoolContainer);
 
         Container.BindMemoryPool<RedBall, BallPool<RedBall>>()
-            .WithInitialSize(50)
+            .WithInitialSize(20)
             .FromComponentInNewPrefab(_ballPrefabAtlas.GetBallPrefab(BallType.Red))
             .UnderTransform(_ballsPoolContainer);
 
@@ -44,8 +44,34 @@ public class GameSceneInstaller : MonoInstaller
         Dictionary<BallType, IMemoryPool> pools = new Dictionary<BallType, IMemoryPool>();
 
         MemoryPool<GreenBall> greenBallPool = Container.Resolve<BallPool<GreenBall>>();
+        if (greenBallPool == null)
+        {
+            Debug.LogError("<color=magenta>[Installer]</color> GreenBall pool is <b>null</b>!");
+        }
+        else
+        {
+            Debug.Log("<color=magenta>[Installer]</color> GreenBall pool resolved successfully.");
+        }
+
         MemoryPool<YellowBall> yellowBallPool = Container.Resolve<BallPool<YellowBall>>();
+        if (yellowBallPool == null)
+        {
+            Debug.LogError("<color=magenta>[Installer]</color> YellowBall pool is <b>null</b>!");
+        }
+        else
+        {
+            Debug.Log("<color=magenta>[Installer]</color> YellowBall pool resolved successfully.");
+        }
+
         MemoryPool<RedBall> redBallPool = Container.Resolve<BallPool<RedBall>>();
+        if (redBallPool == null)
+        {
+            Debug.LogError("<color=magenta>[Installer]</color> RedBall pool is <b>null</b>!");
+        }
+        else
+        {
+            Debug.Log("<color=magenta>[Installer]</color> RedBall pool resolved successfully.");
+        }
 
         return new Dictionary<BallType, IMemoryPool>
         {
