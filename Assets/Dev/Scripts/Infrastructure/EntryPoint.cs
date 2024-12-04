@@ -3,19 +3,16 @@ using Zenject;
 
 public class EntryPoint : MonoBehaviour
 {
-    private IBetPanel _betPanel;
-    private Wallet _wallet;
+    private GameStateMachine _gameStateMachine;
 
     [Inject]
-    public void Construct(IBetPanel betPanel, Wallet wallet)
+    public void Construct(GameStateMachine gameStateMachine)
     {
-        _betPanel = betPanel;
-        _wallet = wallet;
+        _gameStateMachine = gameStateMachine;
     }
 
     private void Start()
     {
-        _betPanel.Initialize();
-        _wallet.Initialize();
+        _gameStateMachine.ChangeState<NewGameState>();
     }
 }

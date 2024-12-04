@@ -1,13 +1,19 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 [RequireComponent(typeof(Button))]
-public class RestartButton : MonoBehaviour, IGameStartRunner
+public class RestartButton : MonoBehaviour
 {
-    public Action StartGame { get; set; }
+    private GameStateMachine _gameStateMachine;
 
     private Button _button;
+
+    [Inject]
+    public void Construct(GameStateMachine gameStateMachine)
+    {
+        _gameStateMachine = gameStateMachine;
+    }
 
     private void Awake()
     {
@@ -24,5 +30,5 @@ public class RestartButton : MonoBehaviour, IGameStartRunner
         _button.onClick.RemoveListener(OnClick);
     }
 
-    private void OnClick() => StartGame?.Invoke();
+    private void OnClick() => _gameStateMachine.ChangeState<NewGameState>();
 }

@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Zenject;
 
-public class GameStateMachine : MonoBehaviour
+public class GameStateMachine
 {
-    // Start is called before the first frame update
-    void Start()
+    private IGameState _currentState;
+    private readonly DiContainer _container;
+
+    public GameStateMachine(DiContainer container)
     {
-        
+        _container = container;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeState<T>() where T : IGameState
     {
-        
+        _currentState = _container.Instantiate<T>();
+        _currentState.Enter();
     }
 }

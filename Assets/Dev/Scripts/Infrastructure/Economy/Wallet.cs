@@ -1,15 +1,20 @@
 using System;
+using Zenject;
 
-public class Wallet : IGameOverRunner
+public class Wallet
 {
-    public Action GameOver { get; set; }
     public Action<float> ValueChanged;
 
-    private const float DEFAULT_BALANCE = 2000f;
+    private GameStateMachine _gameStateMachine;
+
+    private const float DEFAULT_BALANCE = 500f;
     private float _balance;
 
-    public float Balance => _balance;
-
+    [Inject]
+    public void Construct(GameStateMachine gameStateMachine)
+    {
+        _gameStateMachine = gameStateMachine;
+    }
 
     public void Initialize()
     {
@@ -20,6 +25,7 @@ public class Wallet : IGameOverRunner
     {
         _balance += amount;
         ValueChanged?.Invoke(_balance);
+        CheckForGameOver();
     }
 
     public bool TrySpend(float amount)
@@ -28,10 +34,11 @@ public class Wallet : IGameOverRunner
         {
             _balance -= amount;
             ValueChanged?.Invoke(_balance);
+            CheckForGameOver();
             return true;
         }
 
-        GameOver?.Invoke();
+        _gameStateMachine.ChangeState<GameOverState>();
         return false;
     }
 
@@ -39,5 +46,13 @@ public class Wallet : IGameOverRunner
     {
         _balance = DEFAULT_BALANCE;
         ValueChanged?.Invoke(_balance);
+    }
+
+    private void CheckForGameOver()
+    {
+        if (_balance <= 0)
+        {
+            _gameStateMachine.ChangeState<GameOverState>();
+        }
     }
 }
